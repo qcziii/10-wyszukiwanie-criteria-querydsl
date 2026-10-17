@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Agregat: `mvn compile` w tym katalogu kompiluje wszystkie scenariusze naraz (i otwiera je razem w IntelliJ). -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>pl.kurs</groupId>
+    <artifactId>wyszukiwanie-exercises</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>scenarios/01-pusty-parametr</module>
+        <module>scenarios/02-kolejny-where</module>
+        <module>scenarios/03-like-i-znaki-specjalne</module>
+        <module>scenarios/04-nazwy-atrybutow</module>
+        <module>scenarios/05-zakres-dat</module>
+        <module>scenarios/06-powtorzone-produkty</module>
+        <module>scenarios/07-specification-i-stronicowanie</module>
+        <module>scenarios/08-filtr-tagow-ignorowany</module>
+        <module>scenarios/09-brak-klas-q</module>
+        <module>scenarios/10-niemutowalne-wyrazenie</module>
+        <module>scenarios/11-znikaja-produkty-bez-kategorii</module>
+        <module>scenarios/12-querydsl-predicate-w-kontrolerze</module>
+        <module>scenarios/13-projekcja-bean</module>
+        <module>scenarios/14-sortowanie-ignorowane</module>
+        <module>scenarios/15-n-plus-1</module>
+        <module>scenarios/16-wszystkie-tagi</module>
+    </modules>
+</project>

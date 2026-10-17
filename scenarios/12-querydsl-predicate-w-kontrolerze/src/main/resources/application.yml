@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: sklep
+  datasource:
+    url: jdbc:h2:mem:sklep;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+    open-in-view: false
+    properties:
+      hibernate:
+        generate_statistics: true
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    # SQL wysyłany do bazy. Wartości parametrów: org.hibernate.orm.jdbc.bind: trace
+    org.hibernate.SQL: debug
+    # Statystyki Hibernate po każdej sesji: ile zapytań JDBC i ile to trwało. Wyłącz: info
+    org.hibernate.session.metrics: debug
