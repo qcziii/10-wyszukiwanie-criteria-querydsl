@@ -10,11 +10,11 @@
         <relativePath/>
     </parent>
     <groupId>pl.kurs</groupId>
-    <artifactId>sklep-05</artifactId>
+    <artifactId>shop-05</artifactId>
     <version>1.0.0</version>
     <properties>
         <java.version>21</java.version>
-        <!-- Fork OpenFeign. Uwaga: Spring Boot zarządza wersją starego com.querydsl przez właściwość querydsl.version, więc tu inna nazwa -->
+        <!-- OpenFeign fork. Note: Spring Boot manages the version of the old com.querydsl through the querydsl.version property, so a different name here -->
         <openfeign-querydsl.version>7.7</openfeign-querydsl.version>
     </properties>
     <dependencies>
@@ -52,7 +52,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <!-- Generatory: metamodel JPA (Produkt_) i klasy QueryDSL (QProdukt) w target/generated-sources/annotations -->
+                    <!-- Generators: JPA metamodel (Product_) and QueryDSL classes (QProduct) in target/generated-sources/annotations -->
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.hibernate.orm</groupId>
@@ -77,9 +77,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <!-- Logi aplikacji z testów trafiają do target/surefire-reports/*-output.txt, nie na ekran -->
+                    <!-- Application logs from the tests go to target/surefire-reports/*-output.txt, not to the screen -->
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
-                    <!-- Czytelne nazwy testów (@DisplayName) w raportach, z których korzysta check.sh -->
+                    <!-- Readable test names (@DisplayName) in the reports used by check.sh -->
                     <statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
                         <usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
                     </statelessTestsetReporter>

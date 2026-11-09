@@ -19,30 +19,30 @@ Stos: Spring Boot 4.1, Hibernate ORM 7.4, Spring Data JPA, QueryDSL 7.7 (fork Op
 ## Architektura
 
 ```
-Postman / curl ──> localhost:8080 ──> [aplikacja sklep] ──> H2 w pamięci (produkt, kategoria, producent, tag, opinia)
+Postman / curl ──> localhost:8080 ──> [aplikacja sklep] ──> H2 w pamięci (product, category, manufacturer, tag, review)
 ```
 
 | Endpoint | Opis |
 |---|---|
-| `GET /api/produkty/szukaj` | wyszukiwarka na JPA Criteria API (`WyszukiwarkaCriteria`) |
-| `GET /api/produkty/szukaj-qdsl` | ta sama wyszukiwarka na QueryDSL (`WyszukiwarkaQuerydsl`) |
-| `GET /api/produkty/filtr` | tylko w scenariuszu 12: filtr budowany przez Spring Data (`@QuerydslPredicate`) |
-| `GET /api/produkty/lista` | tylko w scenariuszu 13: lekka lista produktów (projekcja QueryDSL) |
+| `GET /api/products/search` | wyszukiwarka na JPA Criteria API (`CriteriaSearch`) |
+| `GET /api/products/search-qdsl` | ta sama wyszukiwarka na QueryDSL (`QuerydslSearch`) |
+| `GET /api/products/filter` | tylko w scenariuszu 12: filtr budowany przez Spring Data (`@QuerydslPredicate`) |
+| `GET /api/products/list` | tylko w scenariuszu 13: lekka lista produktów (projekcja QueryDSL) |
 
-Parametry wyszukiwarki (wszystkie opcjonalne, opis w `KryteriaWyszukiwania.java`):
+Parametry wyszukiwarki (wszystkie opcjonalne, opis w `SearchCriteria.java`):
 
 ```
-nazwa=laptop            fragment nazwy, bez względu na wielkość liter
-kategoria=dom           nazwa kategorii, bez względu na wielkość liter
-cenaOd=100&cenaDo=500   zakres cen, włącznie
-dodanyOd=2026-03-01&dodanyDo=2026-03-31   zakres dat dodania, włącznie (cały ostatni dzień)
-ocenaMin=4              produkt ma co najmniej jedną opinię z taką albo wyższą oceną
-tagi=eko,promocja       produkt ma WSZYSTKIE podane tagi
+name=laptop            fragment nazwy, bez względu na wielkość liter
+category=dom           nazwa kategorii, bez względu na wielkość liter
+priceFrom=100&priceTo=500   zakres cen, włącznie
+addedFrom=2026-03-01&addedTo=2026-03-31   zakres dat dodania, włącznie (cały ostatni dzień)
+minRating=4              produkt ma co najmniej jedną opinię z taką albo wyższą oceną
+tags=eko,promocja       produkt ma WSZYSTKIE podane tagi
 page=0&size=20          stronicowanie
-sort=cena,desc          sortowanie: nazwa, cena, dodany, kategoria (inne pole to błąd 400)
+sort=price,desc          sortowanie: name, price, addedAt, category (inne pole to błąd 400)
 ```
 
-Przykład: `http://localhost:8080/api/produkty/szukaj?nazwa=laptop&cenaDo=3000&sort=cena,desc`
+Przykład: `http://localhost:8080/api/products/search?name=laptop&priceTo=3000&sort=price,desc`
 
 ## Jak pracować
 
@@ -51,7 +51,7 @@ cd scenarios/01-pusty-parametr
 mvn spring-boot:run               # aplikacja na http://localhost:8080, zatrzymanie: Ctrl+C
 
 # w drugim terminalu albo w Postmanie
-curl "http://localhost:8080/api/produkty/szukaj?cenaDo=100"
+curl "http://localhost:8080/api/products/search?priceTo=100"
 
 # automatyczne sprawdzenie, z katalogu głównego repo (aplikacja nie musi działać)
 ./scenarios/01-pusty-parametr/check.sh
@@ -61,7 +61,7 @@ Przeczytaj `ZADANIE.md` w katalogu scenariusza, odtwórz problem, znajdź przycz
 
 `check.sh` kompiluje scenariusz i uruchamia jego testy (`mvn test`, klasa `CheckTest`). Testy wołają endpointy tak jak Postman i porównują wynik z tym, co wynika z danych w bazie. Część testów liczy też zapytania SQL, które aplikacja wysłała do bazy. Logi aplikacji z testów są w `target/surefire-reports/*-output.txt`.
 
-Projekt otwierasz w IntelliJ jako projekt Maven (plik `pom.xml` w katalogu głównym otwiera wszystkie scenariusze naraz). Klasy `QProdukt`, `Produkt_` itd. są generowane przy kompilacji; jeśli IntelliJ ich nie widzi, uruchom `mvn compile` albo „Build > Rebuild Project”.
+Projekt otwierasz w IntelliJ jako projekt Maven (plik `pom.xml` w katalogu głównym otwiera wszystkie scenariusze naraz). Klasy `QProduct`, `Product_` itd. są generowane przy kompilacji; jeśli IntelliJ ich nie widzi, uruchom `mvn compile` albo „Build > Rebuild Project”.
 
 ## Narzędzia
 
@@ -72,10 +72,10 @@ logging.level.org.hibernate.orm.jdbc.bind: trace       # wartości parametrów z
 logging.level.org.hibernate.session.metrics: debug     # po każdym żądaniu: ile zapytań JDBC i ile trwały (włączone)
 ```
 
-- **Konsola H2:** http://localhost:8080/h2-console, JDBC URL `jdbc:h2:mem:sklep`, użytkownik `sa`, bez hasła. Wklej tam SQL z logu i zobacz, co zwraca baza.
-- **Wygenerowane klasy:** `target/generated-sources/annotations/pl/kurs/sklep/model` (metamodel JPA `Produkt_` i klasy QueryDSL `QProdukt`).
-- **Debugger:** pułapka w `WyszukiwarkaCriteria.szukaj` albo `WyszukiwarkaQuerydsl.szukaj` i uruchomienie `SklepApplication` w trybie debug.
-- **Porównanie wersji:** to samo zapytanie na `/szukaj` i `/szukaj-qdsl`. Jeśli wyniki się różnią, porównaj SQL z logu.
+- **Konsola H2:** http://localhost:8080/h2-console, JDBC URL `jdbc:h2:mem:shop`, użytkownik `sa`, bez hasła. Wklej tam SQL z logu i zobacz, co zwraca baza.
+- **Wygenerowane klasy:** `target/generated-sources/annotations/pl/kurs/shop/model` (metamodel JPA `Product_` i klasy QueryDSL `QProduct`).
+- **Debugger:** pułapka w `CriteriaSearch.search` albo `QuerydslSearch.search` i uruchomienie `ShopApplication` w trybie debug.
+- **Porównanie wersji:** to samo zapytanie na `/search` i `/search-qdsl`. Jeśli wyniki się różnią, porównaj SQL z logu.
 - **Ściąga:** [SCIAGA.md](SCIAGA.md), odpowiedniki Criteria i QueryDSL obok siebie.
 
 ## Port 8080 zajęty
@@ -98,7 +98,7 @@ Get-NetTCPConnection -LocalPort 8080 -State Listen | Select-Object LocalPort, Ow
 | 06 | Po filtrze po ocenie produkty się powtarzają | Criteria | średni |
 | 07 | Po przejściu na Specification stronicowanie kończy się błędem | Criteria (Specification) | trudny |
 | 08 | Filtr po tagu zwraca wszystkie produkty | Criteria | średni |
-| 09 | Po dodaniu metamodelu Hibernate kompilacja nie widzi QProdukt | QueryDSL (build) | średni |
+| 09 | Po dodaniu metamodelu Hibernate kompilacja nie widzi QProduct | QueryDSL (build) | średni |
 | 10 | Filtr ceny w wersji QueryDSL jest ignorowany | QueryDSL | łatwy |
 | 11 | Produkty bez kategorii znikają z wyników QueryDSL | QueryDSL | średni |
 | 12 | Filtr nie znajduje lapt, za to pozwala filtrować po cenie zakupu | QueryDSL (web) | średni |

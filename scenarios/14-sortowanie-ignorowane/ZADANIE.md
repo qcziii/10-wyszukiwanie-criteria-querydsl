@@ -14,16 +14,16 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 
 ## Zgłoszenie
 
-W wersji QueryDSL parametr `sort` nic nie zmienia: `sort=cena,desc` daje produkty po kolei według id. Przy okazji: `sort=cenaZakupu` zwraca 200, a w wersji Criteria poprawnie 400 (po cenie zakupu nie wolno sortować).
+W wersji QueryDSL parametr `sort` nic nie zmienia: `sort=price,desc` daje produkty po kolei według id. Przy okazji: `sort=purchasePrice` zwraca 200, a w wersji Criteria poprawnie 400 (po cenie zakupu nie wolno sortować).
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj-qdsl?sort=cena,desc"
-curl -i "http://localhost:8080/api/produkty/szukaj-qdsl?sort=cenaZakupu"
+curl "http://localhost:8080/api/products/search-qdsl?sort=price,desc"
+curl -i "http://localhost:8080/api/products/search-qdsl?sort=purchasePrice"
 ```
 
-**Oczekiwane:** Sortowanie w `/api/produkty/szukaj-qdsl` działa tak jak w wersji Criteria: te same pola (`nazwa`, `cena`, `dodany`, `kategoria`), kilka pól naraz, ta sama kolejność na kolejnych stronach. Inne pole to błąd 400.
+**Oczekiwane:** Sortowanie w `/api/products/search-qdsl` działa tak jak w wersji Criteria: te same pola (`name`, `price`, `addedAt`, `category`), kilka pól naraz, ta sama kolejność na kolejnych stronach. Inne pole to błąd 400.
 
-**Pytanie dodatkowe:** Spring Data ma klasę `Querydsl` z metodą `applyPagination(pageable, query)`. Czy wystarczy jej użyć? Co z `sort=cenaZakupu`?
+**Pytanie dodatkowe:** Spring Data ma klasę `Querydsl` z metodą `applyPagination(pageable, query)`. Czy wystarczy jej użyć? Co z `sort=purchasePrice`?
 
 ## Kiedy skończysz
 

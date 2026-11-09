@@ -17,12 +17,12 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 W wersji QueryDSL brakuje produktów bez kategorii (np. „Bon rabatowy 100%”, „Router Wi-Fi 6”). Do tego `totalElements` mówi 60, a na ostatniej stronie jest 5 produktów zamiast 10. W wersji Criteria wszystko się zgadza.
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj-qdsl?size=10&page=5"
+curl "http://localhost:8080/api/products/search-qdsl?size=10&page=5"
 ```
 
 **Oczekiwane:** Wersja QueryDSL zwraca wszystkie produkty, także bez kategorii, a liczba produktów na stronach zgadza się z `totalElements`. Filtr i sortowanie po kategorii nadal działają.
 
-**Pytanie dodatkowe:** Co by się stało, gdyby w `orderBy` albo `where` użyć ścieżki `produkt.kategoria.nazwa` bez jawnego `leftJoin`? Czy Hibernate 7 doda wtedy złączenie zewnętrzne?
+**Pytanie dodatkowe:** Co by się stało, gdyby w `orderBy` albo `where` użyć ścieżki `product.category.name` bez jawnego `leftJoin`? Czy Hibernate 7 doda wtedy złączenie zewnętrzne?
 
 ## Kiedy skończysz
 

@@ -14,16 +14,16 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 
 ## Zgłoszenie
 
-Zmieniliśmy nazwę pola `cenaBrutto` na `cena` w encji `Produkt`. Projekt się kompiluje, aplikacja startuje, wyszukiwanie po nazwie działa. Ale filtr ceny i sortowanie po cenie kończą się błędem 500.
+Zmieniliśmy nazwę pola `grossPrice` na `price` w encji `Product`. Projekt się kompiluje, aplikacja startuje, wyszukiwanie po nazwie działa. Ale filtr ceny i sortowanie po cenie kończą się błędem 500.
 
 ```bash
-curl -i "http://localhost:8080/api/produkty/szukaj?cenaOd=1000"
-curl -i "http://localhost:8080/api/produkty/szukaj?sort=cena,desc"
+curl -i "http://localhost:8080/api/products/search?priceFrom=1000"
+curl -i "http://localhost:8080/api/products/search?sort=price,desc"
 ```
 
-**Oczekiwane:** Filtr ceny i sortowanie po cenie działają. Dodatkowe wymaganie zespołu: następna zmiana nazwy pola ma zepsuć **kompilację**, a nie działanie aplikacji. `WyszukiwarkaCriteria` nie może więc podawać nazw atrybutów w stringach (`get("...")`, `join("...")`, `fetch("...")`); `check.sh` to sprawdza.
+**Oczekiwane:** Filtr ceny i sortowanie po cenie działają. Dodatkowe wymaganie zespołu: następna zmiana nazwy pola ma zepsuć **kompilację**, a nie działanie aplikacji. `CriteriaSearch` nie może więc podawać nazw atrybutów w stringach (`get("...")`, `join("...")`, `fetch("...")`); `check.sh` to sprawdza.
 
-**Pytanie dodatkowe:** Skąd biorą się klasy `Produkt_`, `Kategoria_`? Gdzie je znaleźć po kompilacji i co się stanie, gdy ktoś usunie z `pom.xml` `hibernate-processor`?
+**Pytanie dodatkowe:** Skąd biorą się klasy `Product_`, `Category_`? Gdzie je znaleźć po kompilacji i co się stanie, gdy ktoś usunie z `pom.xml` `hibernate-processor`?
 
 ## Kiedy skończysz
 

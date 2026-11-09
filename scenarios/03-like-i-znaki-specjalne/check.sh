@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Scenariusz 03-like-i-znaki-specjalne: Szukanie laptop nie znajduje Laptop Dell, a 100% znajduje za dużo
-# Uruchom: ./scenarios/03-like-i-znaki-specjalne/check.sh (z dowolnego katalogu). Kompiluje scenariusz i uruchamia jego testy.
+# Check for scenario 03-like-i-znaki-specjalne (the description is printed below)
+# Run: ./scenarios/03-like-i-znaki-specjalne/check.sh (from any directory). Compiles the scenario and runs its tests.
 SCEN_DIR=$(cd "$(dirname "$0")" && pwd)
 source "$SCEN_DIR/../../scripts/lib.sh"
 echo "Scenariusz 03-like-i-znaki-specjalne: Szukanie laptop nie znajduje Laptop Dell, a 100% znajduje za dużo"

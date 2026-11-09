@@ -17,11 +17,11 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 Każdy filtr osobno działa: „nazwa laptop” daje laptopy, „cena do 3000” daje tańsze produkty. Razem zwracają wszystko do 3000 zł, łącznie z czajnikiem. Wygląda, jakby liczył się tylko ostatni filtr.
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj?nazwa=laptop"
-curl "http://localhost:8080/api/produkty/szukaj?nazwa=laptop&cenaDo=3000"
+curl "http://localhost:8080/api/products/search?name=laptop"
+curl "http://localhost:8080/api/products/search?name=laptop&priceTo=3000"
 ```
 
-**Oczekiwane:** Filtry łączą się przez AND: `nazwa=laptop&cenaDo=3000` zwraca tylko laptopy do 3000 zł, `kategoria=telefony&cenaOd=500&cenaDo=1500` tylko telefony w tym zakresie.
+**Oczekiwane:** Filtry łączą się przez AND: `name=laptop&priceTo=3000` zwraca tylko laptopy do 3000 zł, `category=telefony&priceFrom=500&priceTo=1500` tylko telefony w tym zakresie.
 
 **Pytanie dodatkowe:** Co mówi dokumentacja `CriteriaQuery.where(...)` o warunkach dodanych wcześniej? Jak wyglądałby ten sam błąd w QueryDSL (`query.where(a); query.where(b);`)?
 

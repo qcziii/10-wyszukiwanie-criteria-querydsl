@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Scenariusz 15-n-plus-1: Jedno wyszukiwanie wysyła do bazy kilkanaście zapytań
-# Uruchom: ./scenarios/15-n-plus-1/check.sh (z dowolnego katalogu). Kompiluje scenariusz i uruchamia jego testy.
+# Check for scenario 15-n-plus-1 (the description is printed below)
+# Run: ./scenarios/15-n-plus-1/check.sh (from any directory). Compiles the scenario and runs its tests.
 SCEN_DIR=$(cd "$(dirname "$0")" && pwd)
 source "$SCEN_DIR/../../scripts/lib.sh"
 echo "Scenariusz 15-n-plus-1: Jedno wyszukiwanie wysyła do bazy kilkanaście zapytań"

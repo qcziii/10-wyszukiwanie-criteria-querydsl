@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Wspólne funkcje dla skryptów check.sh w scenariuszach.
-# Wymagają bash, Mavena (mvn) i Javy 21. Na Windows: Git Bash.
+# Shared functions for the check.sh scripts in the scenarios.
+# They need bash, Maven (mvn) and Java 21. On Windows: Git Bash.
 
 PASS=0
 FAIL=0
@@ -8,14 +8,14 @@ FAIL=0
 ok()  { echo "  [OK]   $1"; PASS=$((PASS+1)); }
 bad() { echo "  [FAIL] $1"; FAIL=$((FAIL+1)); }
 
-# Zamienia encje XML z raportu surefire na zwykłe znaki.
+# Turns XML entities from the surefire report into plain characters.
 xml_decode() {
   sed -e 's/&#10;/\n/g' -e 's/&#13;//g' -e 's/&quot;/"/g' -e "s/&apos;/'/g" \
       -e 's/&lt;/</g' -e 's/&gt;/>/g' -e 's/&amp;/\&/g'
 }
 
-# run_tests <katalog scenariusza>
-# Kompiluje scenariusz i uruchamia jego testy (mvn test), potem wypisuje wynik każdego testu.
+# run_tests <scenario directory>
+# Compiles the scenario and runs its tests (mvn test), then prints the result of every test.
 run_tests() {
   local dir log reports
   dir=$(cd "$1" && pwd)
@@ -72,7 +72,7 @@ summary() {
   echo
   echo "Wynik: $PASS OK, $FAIL FAIL"
   if [ "$FAIL" -eq 0 ] && [ "$PASS" -gt 0 ]; then
-    echo "WYNIK: wszystkie sprawdzenia przeszły"
+    echo "WYNIK: all sprawdzenia przeszły"
   else
     echo "WYNIK: są błędy"
     exit 1

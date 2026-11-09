@@ -14,14 +14,14 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 
 ## Zgłoszenie
 
-Filtr tagów ma zwracać produkty, które mają **wszystkie** wybrane tagi (tak jest opisane w `KryteriaWyszukiwania`). Tymczasem `tagi=eko,promocja` zwraca produkty z którymkolwiek z nich, w obu wersjach wyszukiwarki.
+Filtr tagów ma zwracać produkty, które mają **wszystkie** wybrane tagi (tak jest opisane w `SearchCriteria`). Tymczasem `tags=eko,promocja` zwraca produkty z którymkolwiek z nich, w obu wersjach wyszukiwarki.
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj?tagi=eko,promocja"
-curl "http://localhost:8080/api/produkty/szukaj-qdsl?tagi=eko,promocja"
+curl "http://localhost:8080/api/products/search?tags=eko,promocja"
+curl "http://localhost:8080/api/products/search-qdsl?tags=eko,promocja"
 ```
 
-**Oczekiwane:** W obu wersjach `tagi=eko,promocja` zwraca tylko produkty z oboma tagami, `tagi=EKO,promocja,nowosc` z trzema (bez względu na wielkość liter), a stronicowanie i `totalElements` są poprawne.
+**Oczekiwane:** W obu wersjach `tags=eko,promocja` zwraca tylko produkty z oboma tagami, `tags=EKO,promocja,nowosc` z trzema (bez względu na wielkość liter), a stronicowanie i `totalElements` są poprawne.
 
 **Pytanie dodatkowe:** Jak zrobić „wszystkie tagi” jednym zapytaniem z `group by ... having count(distinct tag) = :n`? Kiedy to podejście jest lepsze od osobnych `EXISTS`?
 

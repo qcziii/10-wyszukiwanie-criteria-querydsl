@@ -17,12 +17,12 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 Raport „produkty dodane w marcu” (od 2026-03-01 do 2026-03-31) nie zawiera produktów dodanych 31 marca w ciągu dnia. Produkt dodany 31 marca o północy jest, a te z 12:00 i 23:59 nie.
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj?dodanyOd=2026-03-31&dodanyDo=2026-03-31"
+curl "http://localhost:8080/api/products/search?addedFrom=2026-03-31&addedTo=2026-03-31"
 ```
 
-**Oczekiwane:** `dodanyDo` obejmuje cały podany dzień. `dodanyOd=2026-03-31&dodanyDo=2026-03-31` zwraca trzy produkty z 31 marca (00:00, 12:00, 23:59), a produkt z 1 kwietnia 00:00 do marca nie należy.
+**Oczekiwane:** `addedTo` obejmuje cały podany dzień. `addedFrom=2026-03-31&addedTo=2026-03-31` zwraca trzy produkty z 31 marca (00:00, 12:00, 23:59), a produkt z 1 kwietnia 00:00 do marca nie należy.
 
-**Pytanie dodatkowe:** Dlaczego `lessThanOrEqualTo(dodany, dodanyDo.atTime(23, 59, 59))` też nie jest dobrą poprawką?
+**Pytanie dodatkowe:** Dlaczego `lessThanOrEqualTo(addedAt, addedTo.atTime(23, 59, 59))` też nie jest dobrą poprawką?
 
 ## Kiedy skończysz
 

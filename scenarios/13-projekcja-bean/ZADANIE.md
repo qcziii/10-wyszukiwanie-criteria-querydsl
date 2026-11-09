@@ -14,13 +14,13 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 
 ## Zgłoszenie
 
-Nowy endpoint `/api/produkty/lista` (podpowiedzi w polu wyszukiwania) zwraca dziwne dane: zamiast nazw produktów są nazwy kategorii („Laptopy”, „Laptopy”, ...), a pole `kategoria` jest zawsze `null`. Id i ceny są dobre.
+Nowy endpoint `/api/products/list` (podpowiedzi w polu wyszukiwania) zwraca dziwne dane: zamiast nazw produktów są nazwy kategorii („Laptopy”, „Laptopy”, ...), a pole `category` jest zawsze `null`. Id i ceny są dobre.
 
 ```bash
-curl "http://localhost:8080/api/produkty/lista"
+curl "http://localhost:8080/api/products/list"
 ```
 
-**Oczekiwane:** Każdy element listy ma nazwę produktu w `nazwa` i nazwę kategorii w `kategoria` (`null` tylko dla produktów bez kategorii).
+**Oczekiwane:** Każdy element listy ma nazwę produktu w `name` i nazwę kategorii w `category` (`null` tylko dla produktów bez kategorii).
 
 **Pytanie dodatkowe:** Jakie są inne rodzaje projekcji w QueryDSL (`Projections.constructor`, `Projections.fields`, rekord)? Która z nich zgłosiłaby błąd przy takiej pomyłce?
 

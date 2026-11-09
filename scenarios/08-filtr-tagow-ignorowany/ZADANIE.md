@@ -14,16 +14,16 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 
 ## Zgłoszenie
 
-Filtr po tagu przestał działać: `tagi=outlet` zwraca wszystkie produkty. Za to `tagi=xyz` (nieistniejący tag) poprawnie zwraca pustą listę, więc filtr „coś robi”.
+Filtr po tagu przestał działać: `tags=outlet` zwraca wszystkie produkty. Za to `tags=xyz` (nieistniejący tag) poprawnie zwraca pustą listę, więc filtr „coś robi”.
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj?tagi=outlet"
-curl "http://localhost:8080/api/produkty/szukaj?tagi=xyz"
+curl "http://localhost:8080/api/products/search?tags=outlet"
+curl "http://localhost:8080/api/products/search?tags=xyz"
 ```
 
-**Oczekiwane:** `tagi=outlet` zwraca produkty z tagiem outlet, `tagi=eko,promocja` produkty z oboma tagami, filtr łączy się z innymi (`tagi=eko&kategoria=dom`).
+**Oczekiwane:** `tags=outlet` zwraca produkty z tagiem outlet, `tags=eko,promocja` produkty z oboma tagami, filtr łączy się z innymi (`tags=eko&category=dom`).
 
-**Pytanie dodatkowe:** Czym różni się `subquery.correlate(produkt)` od `subquery.from(Produkt.class)`? Jak wygląda odpowiednik w QueryDSL?
+**Pytanie dodatkowe:** Czym różni się `subquery.correlate(product)` od `subquery.from(Product.class)`? Jak wygląda odpowiednik w QueryDSL?
 
 ## Kiedy skończysz
 

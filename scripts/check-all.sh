@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Uruchamia check.sh wszystkich scenariuszy i wypisuje podsumowanie.
+# Runs check.sh of all scenarios and prints a summary.
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 ok=0; fail=0; failed=()
 for s in "$ROOT"/scenarios/*/; do

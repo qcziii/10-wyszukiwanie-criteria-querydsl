@@ -17,7 +17,7 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 Monitoring bazy pokazuje, że jedno wyszukiwanie w wersji QueryDSL wysyła kilkanaście zapytań SQL (wersja Criteria: 3). Wyniki są poprawne. Ktoś niedawno „uprościł” zapytanie.
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj-qdsl?size=20"
+curl "http://localhost:8080/api/products/search-qdsl?size=20"
 # w logu aplikacji: linie org.hibernate.SQL i podsumowanie org.hibernate.session.metrics („preparing N JDBC statements”)
 ```
 

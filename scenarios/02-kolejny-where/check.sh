@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Scenariusz 02-kolejny-where: Z dwoma filtrami działa tylko jeden
-# Uruchom: ./scenarios/02-kolejny-where/check.sh (z dowolnego katalogu). Kompiluje scenariusz i uruchamia jego testy.
+# Check for scenario 02-kolejny-where (the description is printed below)
+# Run: ./scenarios/02-kolejny-where/check.sh (from any directory). Compiles the scenario and runs its tests.
 SCEN_DIR=$(cd "$(dirname "$0")" && pwd)
 source "$SCEN_DIR/../../scripts/lib.sh"
 echo "Scenariusz 02-kolejny-where: Z dwoma filtrami działa tylko jeden"

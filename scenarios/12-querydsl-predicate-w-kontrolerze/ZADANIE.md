@@ -14,16 +14,16 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 
 ## Zgłoszenie
 
-Panel administracyjny korzysta z prostego filtra `/api/produkty/filtr`, w którym Spring Data sam buduje warunek QueryDSL z parametrów (`@QuerydslPredicate`). Dwa zgłoszenia: wpisanie „lapt” nic nie znajduje (trzeba podać pełną nazwę z wielkimi literami), a audyt bezpieczeństwa zauważył, że `?cenaZakupu=...` filtruje po poufnej cenie zakupu, więc da się ją odgadnąć.
+Panel administracyjny korzysta z prostego filtra `/api/products/filter`, w którym Spring Data sam buduje warunek QueryDSL z parametrów (`@QuerydslPredicate`). Dwa zgłoszenia: wpisanie „lapt” nic nie znajduje (trzeba podać pełną nazwę z wielkimi literami), a audyt bezpieczeństwa zauważył, że `?purchasePrice=...` filtruje po poufnej cenie zakupu, więc da się ją odgadnąć.
 
 ```bash
-curl "http://localhost:8080/api/produkty/filtr?nazwa=lapt"
-curl "http://localhost:8080/api/produkty/filtr?cenaZakupu=0.00"
+curl "http://localhost:8080/api/products/filter?name=lapt"
+curl "http://localhost:8080/api/products/filter?purchasePrice=0.00"
 ```
 
-**Oczekiwane:** Teksty (`nazwa`, `kategoria.nazwa`) szukają fragmentu bez względu na wielkość liter, `cena` dalej filtruje dokładnie. Filtrować można tylko po `nazwa`, `cena`, `dostepny`, `kategoria.nazwa`; inne parametry (np. `cenaZakupu`) są ignorowane.
+**Oczekiwane:** Teksty (`name`, `category.name`) szukają fragmentu bez względu na wielkość liter, `price` dalej filtruje dokładnie. Filtrować można tylko po `name`, `price`, `available`, `category.name`; inne parametry (np. `purchasePrice`) są ignorowane.
 
-**Pytanie dodatkowe:** Filtr przyjmuje też `Pageable`. Czy `sort=cenaZakupu` na `/api/produkty/filtr` jest bezpieczne? Co zrobić z sortowaniem?
+**Pytanie dodatkowe:** Filtr przyjmuje też `Pageable`. Czy `sort=purchasePrice` na `/api/products/filter` jest bezpieczne? Co zrobić z sortowaniem?
 
 ## Kiedy skończysz
 

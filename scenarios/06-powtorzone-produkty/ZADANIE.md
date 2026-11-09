@@ -17,10 +17,10 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 Filtr „tylko produkty z opinią co najmniej 4 gwiazdki” pokazuje dziwne rzeczy: `totalElements` jest większe niż liczba takich produktów, a pierwsza strona po 10 ma tylko 6 produktów, choć wyników jest kilkadziesiąt.
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj?ocenaMin=4&size=10"
+curl "http://localhost:8080/api/products/search?minRating=4&size=10"
 ```
 
-**Oczekiwane:** Każdy produkt raz, `totalElements` równe liczbie produktów, które mają co najmniej jedną opinię z oceną `>= ocenaMin`, i pełne strony po 10.
+**Oczekiwane:** Każdy produkt raz, `totalElements` równe liczbie produktów, które mają co najmniej jedną opinię z oceną `>= minRating`, i pełne strony po 10.
 
 **Pytanie dodatkowe:** Dlaczego na liście nie ma powtórzonych produktów, skoro SQL zwraca powtórzone wiersze? Co by się stało z tym samym kodem w Hibernate 5?
 

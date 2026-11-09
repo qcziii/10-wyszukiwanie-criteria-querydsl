@@ -17,12 +17,12 @@ mvn spring-boot:run                 # aplikacja na http://localhost:8080, zatrzy
 Szukanie „laptop” nie znajduje „Laptop Dell XPS 13”. Gdy wpiszę dokładną nazwę, znajduje. Klienci szukają też „100%” (bony rabatowe) i „kabel_usb”: po naszej pierwszej poprawce te wyszukiwania zaczęły zwracać za dużo.
 
 ```bash
-curl "http://localhost:8080/api/produkty/szukaj?nazwa=laptop"
-curl "http://localhost:8080/api/produkty/szukaj?nazwa=100%25"       # %25 to zakodowany znak %
-curl "http://localhost:8080/api/produkty/szukaj?nazwa=kabel_usb"
+curl "http://localhost:8080/api/products/search?name=laptop"
+curl "http://localhost:8080/api/products/search?name=100%25"       # %25 to zakodowany znak %
+curl "http://localhost:8080/api/products/search?name=kabel_usb"
 ```
 
-**Oczekiwane:** `nazwa` to fragment nazwy bez względu na wielkość liter (też polskich: `ŁÓDKA` znajduje „łódka wędkarska”). Znaki `%` i `_` wpisane przez użytkownika oznaczają same siebie: `100%` znajduje tylko „Bon rabatowy 100%”, `kabel_usb` tylko „kabel_usb-c 1 m”.
+**Oczekiwane:** `name` to fragment nazwy bez względu na wielkość liter (też polskich: `ŁÓDKA` znajduje „łódka wędkarska”). Znaki `%` i `_` wpisane przez użytkownika oznaczają same siebie: `100%` znajduje tylko „Bon rabatowy 100%”, `kabel_usb` tylko „kabel_usb-c 1 m”.
 
 **Pytanie dodatkowe:** Na PostgreSQL ten sam kod zachowuje się tak samo, a na MySQL z domyślnym porównywaniem napisów pierwszy błąd byłby niewidoczny. Dlaczego? Czym różni się `ILIKE` od `lower(...) like`?
 

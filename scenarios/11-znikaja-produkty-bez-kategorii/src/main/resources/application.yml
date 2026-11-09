@@ -1,8 +1,8 @@
 spring:
   application:
-    name: sklep
+    name: shop
   datasource:
-    url: jdbc:h2:mem:sklep;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:shop;DB_CLOSE_DELAY=-1
     username: sa
     password:
   jpa:
@@ -19,7 +19,7 @@ spring:
 
 logging:
   level:
-    # SQL wysyłany do bazy. Wartości parametrów: org.hibernate.orm.jdbc.bind: trace
+    # SQL sent to the database. Parameter values: org.hibernate.orm.jdbc.bind: trace
     org.hibernate.SQL: debug
-    # Statystyki Hibernate po każdej sesji: ile zapytań JDBC i ile to trwało. Wyłącz: info
+    # Hibernate statistics after every session: how many JDBC queries and how long it took. Turn off: info
     org.hibernate.session.metrics: debug

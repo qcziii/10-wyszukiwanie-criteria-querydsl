@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Scenariusz 06-powtorzone-produkty: Po filtrze po ocenie produkty się powtarzają
-# Uruchom: ./scenarios/06-powtorzone-produkty/check.sh (z dowolnego katalogu). Kompiluje scenariusz i uruchamia jego testy.
+# Check for scenario 06-powtorzone-produkty (the description is printed below)
+# Run: ./scenarios/06-powtorzone-produkty/check.sh (from any directory). Compiles the scenario and runs its tests.
 SCEN_DIR=$(cd "$(dirname "$0")" && pwd)
 source "$SCEN_DIR/../../scripts/lib.sh"
-echo "Scenariusz 06-powtorzone-produkty: Po filtrze po ocenie produkty się powtarzają"
+echo "Scenariusz 06-powtorzone-produkty: Po filtrze po ocenie products się powtarzają"
 run_tests "$SCEN_DIR"
 summary
